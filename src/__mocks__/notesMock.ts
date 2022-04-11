@@ -1,6 +1,5 @@
 import { faker } from "@faker-js/faker"
 import { LngLatTuple } from "../components/Map/types"
-import { Notes } from "../features/notes/Notes"
 import { Note } from "../features/notes/types"
 import { uuid } from "../utils/uuid"
 

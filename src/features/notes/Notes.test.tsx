@@ -1,8 +1,8 @@
-import "react-native"
-import React, { forwardRef } from "react"
-import { fireEvent, render } from "@testing-library/react-native"
-import { Notes } from "./Notes"
 import { expect, it } from "@jest/globals"
+import { fireEvent } from "@testing-library/react-native"
+import React from "react"
+import "react-native"
+import { Notes } from "./Notes"
 
 describe("Notes", () => {
     it("should toggle pin selection mode", () => {

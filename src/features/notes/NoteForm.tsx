@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react"
-import { ButtonPrimary, ButtonSecondary, ButtonSmall } from "../../components/Button/Button"
-import { ImageInput, FormInput } from "../../components/Forms/Input"
-import { Note } from "./types"
-import styled from "styled-components/native"
-
-import { FormRow } from "../../components/Forms/Layout"
 import { View } from "react-native"
+import styled from "styled-components/native"
+import { ButtonPrimary, ButtonSecondary } from "../../components/Button/Button"
+import { FormInput, ImageInput } from "../../components/Forms/Input"
+import { FormRow } from "../../components/Forms/Layout"
+import { Note } from "./types"
 
 const NoteFormContainer = styled.View`
     margin: 16px;

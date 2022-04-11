@@ -1,8 +1,7 @@
+import * as ImagePicker from "expo-image-picker"
 import React, { useState } from "react"
 import styled from "styled-components/native"
-import { ButtonSecondary, ButtonSmall } from "../Button/Button"
-import * as ImagePicker from "expo-image-picker"
-import { Image } from "react-native"
+import { ButtonSmall } from "../Button/Button"
 
 const Container = styled.View`
     flex-direction: column;

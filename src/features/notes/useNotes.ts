@@ -2,8 +2,8 @@ import { useAsyncStorage } from "@react-native-async-storage/async-storage"
 import { useEffect, useState } from "react"
 import { errorReportingService } from "../../services/errorReporting.service"
 import { uuid } from "../../utils/uuid"
-import { Note } from "./types"
 import notesMock from "../../__mocks__/notesMock"
+import { Note } from "./types"
 
 /**
  * This hook persists the notes in local storage for mocking purposes.

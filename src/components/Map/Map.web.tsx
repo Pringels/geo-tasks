@@ -1,8 +1,8 @@
-import React, { forwardRef, useCallback, useEffect, useRef, useState } from "react"
 import mapboxgl, { Map as MapType, Marker } from "mapbox-gl"
 import "mapbox-gl/dist/mapbox-gl.css"
-import { LngLatTuple, MapMarker, MapProps, MapRef } from "./types"
+import React, { forwardRef, useEffect, useRef, useState } from "react"
 import styled from "styled-components"
+import { LngLatTuple, MapMarker, MapProps, MapRef } from "./types"
 
 if (!process.env.MAPBOX_ACCESS_TOKEN) {
     throw new Error("MAPBOX_ACCESS_TOKEN is not set")

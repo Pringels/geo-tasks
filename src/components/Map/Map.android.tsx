@@ -1,6 +1,6 @@
 import MapboxGL from "@react-native-mapbox-gl/maps"
 import React, { forwardRef, useEffect, useState } from "react"
-import { Pressable, StyleSheet, TouchableOpacity, View } from "react-native"
+import { StyleSheet } from "react-native"
 import styled from "styled-components/native"
 import { Marker } from "../Icons/Marker"
 import { LngLatTuple, MapProps, MapRef } from "./types"

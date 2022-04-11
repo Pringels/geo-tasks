@@ -1,6 +1,6 @@
 import React from "react"
-import { Notes } from "./features/notes/Notes"
 import styled, { ThemeProvider } from "styled-components/native"
+import { Notes } from "./features/notes/Notes"
 import { theme } from "./theme"
 
 const Container = styled.View`

@@ -1,5 +1,4 @@
 import React, { ReactNode } from "react"
-import { View } from "react-native"
 import styled from "styled-components/native"
 
 type ModalProps = {

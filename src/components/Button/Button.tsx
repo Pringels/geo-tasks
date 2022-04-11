@@ -1,6 +1,5 @@
-import styled, { ThemeContext } from "styled-components/native"
-import { Button as NativeButton } from "react-native"
-import React, { useContext } from "react"
+import React from "react"
+import styled from "styled-components/native"
 
 type ButtonProps = {
     title: string

@@ -1,8 +1,6 @@
 import React, { forwardRef } from "react"
-import { View } from "react-native"
-import { Marker } from "react-native-svg"
+import { Text, View } from "react-native"
 import { MapProps } from "../types"
-import { Text } from "react-native"
 
 export const Map = forwardRef((props: MapProps, ref) => {
     if (ref) {

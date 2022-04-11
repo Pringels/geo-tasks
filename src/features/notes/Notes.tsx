@@ -1,16 +1,16 @@
 import React, { useMemo, useRef, useState } from "react"
 import { Platform } from "react-native"
-import { useNotes } from "./useNotes"
-import { Map } from "../../components/Map"
 import styled from "styled-components/native"
-import { NoteForm } from "./NoteForm"
 import { ButtonPrimary, ButtonSecondary } from "../../components/Button/Button"
-import { LngLatTuple, MapMarker, MapRef } from "../../components/Map/types"
 import { Marker as MarkerIcon } from "../../components/Icons/Marker"
-import { Note } from "./types"
-import { errorReportingService } from "../../services/errorReporting.service"
 import { FullPageLayout } from "../../components/Layout/FullPageLayout"
+import { Map } from "../../components/Map"
+import { LngLatTuple, MapMarker, MapRef } from "../../components/Map/types"
 import { Modal } from "../../components/Modal"
+import { errorReportingService } from "../../services/errorReporting.service"
+import { NoteForm } from "./NoteForm"
+import { Note } from "./types"
+import { useNotes } from "./useNotes"
 
 const STARTING_LNG_LAT = [13.4, 52.52]
 
