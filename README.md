@@ -23,8 +23,8 @@ First install the project's dependencies:
 Command to run the web app:  
 `npx expo-cli start --web`
 
-Command to build and run the Android app on a connected ADB device:
+Command to build and run the Android app on a connected ADB device:  
 `npx expo-cli run:android`
 
-Command to run tests:
+Command to run tests:  
 `yarn test`
