@@ -98,14 +98,13 @@ export const Notes = () => {
     const mapRef = useRef<MapRef>()
     const mapMarkers = useMemo(() => notes.map(({ lngLat, id }) => ({ lngLat, id })), [notes])
     const mapDisabled = mode.state === "createNote"
-
-    const isWeb = Platform.OS === "web"
     const centerMarkerVisible =
         mode.state === "pickLocation" || mode.state === "createNote" || mode.state === "editNote"
 
     // FIXME: Dirty workarounds due to my inexperience with react-native for web :D
+    const isWeb = Platform.OS === "web"
     const disablePointerEvents = isWeb
-    const DeviceSpecificFormContainer = Platform.OS === "web" ? FormContainer : MobileFormContainer
+    const DeviceSpecificFormContainer = isWeb ? FormContainer : MobileFormContainer
 
     return (
         <NotesContainer pointerEvents={disablePointerEvents ? "none" : "box-none"}>
