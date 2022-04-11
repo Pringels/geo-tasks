@@ -1,6 +1,15 @@
-# Geo tasks App
+# Geo Tasks
 
 A cross-platform app for taking notes on a map.
+
+```
+          _,--',   _._.--._____
+   .--.--';_'-.', ";_      _.,-'
+  .'--'.  _.'    {`'-;_ .-.>.'
+        '-:_      )  / `' '=.
+          ) >     {_/,     /~)
+          |/               `^ .'
+```
 
 ## Requirements
 
