@@ -44,7 +44,7 @@ export const FormInput = ({ label, placeholder, value, onChange }: InputProps) =
     )
 }
 
-const ImageSelectioncontainer = styled.View`
+const ImageSelectionContainer = styled.View`
     flex-direction: row;
     align-items: flex-start;
 `
@@ -85,14 +85,14 @@ export const ImageInput = ({ label, value, onChange }: FileInputProps) => {
     return (
         <Container>
             <Label>{label}</Label>
-            <ImageSelectioncontainer>
+            <ImageSelectionContainer>
                 <ButtonSmall title="Upload" onPress={pickImage} />
                 {!!image && (
                     <ImagePreviewContainer>
                         <ImagePreview source={{ uri: image }} />
                     </ImagePreviewContainer>
                 )}
-            </ImageSelectioncontainer>
+            </ImageSelectionContainer>
         </Container>
     )
 }

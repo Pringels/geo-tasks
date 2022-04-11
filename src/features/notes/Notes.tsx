@@ -58,50 +58,39 @@ type ModeEditingNote = {
 type Mode = ModeInitial | ModePickingLocation | ModeAddingNote | ModeEditingNote
 
 export const Notes = () => {
-    const { notes, createNote, updateNote, deleteNote } = useNotes()
     const [mode, setMode] = useState<Mode>({ state: "initial" })
-    const isWeb = Platform.OS === "web"
 
-    const handleCancel = () => {
-        setMode({ state: "initial" })
-    }
-    const handleAddNote = () => {
-        setMode({ state: "pickLocation" })
-    }
-    const handlePickLocation = () => {
+    const handleAddNote = () => setMode({ state: "pickLocation" })
+    const handleSetPin = () => {
         const lngLat = mapRef.current?.center
-        if (lngLat) {
-            setMode({ state: "createNote", lngLat })
-        } else {
+        if (!lngLat) {
             setMode({ state: "initial" })
+            return
         }
+        setMode({ state: "createNote", lngLat })
     }
-    const handleCreate = (note: Note) => {
+    const handleSubmitForm = (note: Note) => {
         setMode({ state: "initial" })
         createNote(note)
     }
-    const handleEdit = (mapMarker: MapMarker) => {
+    const handleClose = () => setMode({ state: "initial" })
+
+    const { notes, createNote, updateNote, deleteNote } = useNotes()
+    const handleSelectNote = (mapMarker: MapMarker) => {
         const note = notes.find((n) => n.id === mapMarker.id)
-        if (note) {
-            setMode({ state: "editNote", note })
-            if (mapRef) {
-                mapRef.current?.jumpTo(mapMarker.lngLat)
-            }
-        } else {
-            errorReportingService.logError(
-                `A marker was clicked for a note that does not exist. Note ID: ${mapMarker.id}`
-            )
+        if (!note) {
             setMode({ state: "initial" })
+            return
         }
+        setMode({ state: "editNote", note })
+        mapRef.current?.jumpTo(mapMarker.lngLat)
     }
-    const handleSave = (editedNote: Note) => {
+    const handleSaveNote = (editedNote: Note) => {
         const lngLat = mapRef.current?.center
-        if (lngLat) {
-            updateNote({ ...editedNote, lngLat })
-            setMode({ state: "initial" })
-        }
+        if (lngLat) updateNote({ ...editedNote, lngLat })
+        setMode({ state: "initial" })
     }
-    const handleDelete = (note: Note) => {
+    const handleDeleteNote = (note: Note) => {
         if (note.id) deleteNote(note.id)
         setMode({ state: "initial" })
     }
@@ -109,16 +98,12 @@ export const Notes = () => {
     const mapRef = useRef<MapRef>()
     const mapMarkers = useMemo(() => notes.map(({ lngLat, id }) => ({ lngLat, id })), [notes])
     const mapDisabled = mode.state === "createNote"
+
+    const isWeb = Platform.OS === "web"
     const centerMarkerVisible =
         mode.state === "pickLocation" || mode.state === "createNote" || mode.state === "editNote"
 
-    const cancelButton = (
-        <ActionRow>
-            <ButtonSecondary title="X" onPress={handleCancel} />
-        </ActionRow>
-    )
-
-    // Dirty workarounds due to my inexperience with react-native for web :D
+    // FIXME: Dirty workarounds due to my inexperience with react-native for web :D
     const disablePointerEvents = isWeb
     const DeviceSpecificFormContainer = Platform.OS === "web" ? FormContainer : MobileFormContainer
 
@@ -127,7 +112,7 @@ export const Notes = () => {
             <Map
                 initialCenter={STARTING_LNG_LAT}
                 markers={mapMarkers}
-                onClickMarker={handleEdit}
+                onClickMarker={handleSelectNote}
                 interactive={!mapDisabled}
                 ref={mapRef}
             />
@@ -145,34 +130,34 @@ export const Notes = () => {
                 )}
                 {mode.state === "pickLocation" && (
                     <ActionsContainer>
-                        {cancelButton}
                         <ActionRow>
-                            <ButtonPrimary title="Set pin here" onPress={handlePickLocation} />
+                            <ButtonSecondary title="X" onPress={handleClose} />
+                        </ActionRow>
+                        <ActionRow>
+                            <ButtonPrimary title="Set pin here" onPress={handleSetPin} />
                         </ActionRow>
                     </ActionsContainer>
                 )}
                 {mode.state === "createNote" && (
-                    <>
-                        <DeviceSpecificFormContainer>
-                            <Modal>
-                                <NoteForm
-                                    onCreate={(partialNote) =>
-                                        handleCreate({ ...partialNote, lngLat: mode.lngLat })
-                                    }
-                                    onCancel={handleCancel}
-                                />
-                            </Modal>
-                        </DeviceSpecificFormContainer>
-                    </>
+                    <DeviceSpecificFormContainer>
+                        <Modal>
+                            <NoteForm
+                                onCreate={(partialNote) =>
+                                    handleSubmitForm({ ...partialNote, lngLat: mode.lngLat })
+                                }
+                                onCancel={handleClose}
+                            />
+                        </Modal>
+                    </DeviceSpecificFormContainer>
                 )}
                 {mode.state === "editNote" && (
                     <DeviceSpecificFormContainer>
                         <Modal>
                             <NoteForm
                                 note={mode.note}
-                                onSave={handleSave}
-                                onDelete={handleDelete}
-                                onCancel={handleCancel}
+                                onSave={handleSaveNote}
+                                onDelete={handleDeleteNote}
+                                onCancel={handleClose}
                             />
                         </Modal>
                     </DeviceSpecificFormContainer>

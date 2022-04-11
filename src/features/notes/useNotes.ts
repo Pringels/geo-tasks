@@ -30,6 +30,9 @@ export const useNotes = () => {
     }
     const deleteNote = (noteId: string) => setNotes((state) => state.filter((n) => n.id !== noteId))
 
+    /**
+     * Load notes from local storage. If no notes are found, create some mock notes.
+     */
     useEffect(() => {
         getItem().then((value: string | null) => {
             if (value) {
